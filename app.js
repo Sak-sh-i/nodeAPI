@@ -10,16 +10,6 @@ var usersRouter = require('./routes/users');
 var testAPIRouter = require('./routes/testAPI');
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(cors());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
 // cors function
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -29,6 +19,22 @@ app.use(function (req, res, next) {
   );
   next();
 });
+
+app.use(cors());
+app.use(
+  cors({
+    origin: "*", // restrict calls to those this address
+  })
+);
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

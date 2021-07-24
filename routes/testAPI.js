@@ -10,7 +10,7 @@ router.use(bodyParser.json());
 const imagesSchema = new mongoose.Schema({
     img:
     {
-        data: Buffer,   // base64 encoded
+        data: JSON,   // base64 encoded
         contentType: {
             type: String,
             default: "img/png",
@@ -26,10 +26,19 @@ const Image = mongoose.model("Image", imagesSchema);
 
 router.post("/", async (req, res) => {
     try {
-        await Image.create({ img: { data: req.body } })
+        const newImg = await Image.create({ img: { data: req.body } })
         console.log(`---from api: Saved to DB`);
+        res.status(201).json({
+            status: "success",
+            data: {
+                img: newImg,
+            },
+        });
     } catch (err) {
-        console.log(err.message);
+        res.status(400).json({
+            status: "failed",
+            message: err.message,
+        });
     }
 });
 
