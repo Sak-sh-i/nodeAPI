@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
-// var b64toBlob = require('b64-to-blob');
 
 router.use(bodyParser.json());
 
@@ -26,7 +25,7 @@ const Image = mongoose.model("Image", imagesSchema);
 
 router.post("/", async (req, res) => {
     try {
-        const newImg = await Image.create({ img: { data: req.body } })
+        const newImg = await Image.create(req.body);
         console.log(`---from api: Saved to DB`);
         res.status(201).json({
             status: "success",
