@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excali x MongoDB</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial;
+        }
+
+        .img-body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .banner {
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .banner h1 {
+            color: blueviolet;
+        }
+
+        .banner h2 {
+            font-weight: normal;
+        }
+
+        .image {
+            --clip-start: ellipse(0 0 at 0 0);
+            --clip-end: ellipse(150% 150% at 0 0);
+        }
+
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            width: 600px;
+            grid-gap: 0.5rem;
+        }
+
+        .image-container .image {
+            position: relative;
+            padding-bottom: 100%;
+        }
+
+        .image-container .image img {
+            height: 100%;
+            width: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+            left: 0;
+            position: absolute;
+            top: 0;
+        }
+
+        .image-container .image img:nth-of-type(1) {
+            filter: grayscale(1) brightness(40%);
+        }
+
+        .image-container .image img:nth-of-type(2) {
+            -webkit-clip-path: var(--clip-start);
+            clip-path: var(--clip-start);
+            transition: -webkit-clip-path 0.5s;
+            transition: clip-path 0.5s;
+            transition: clip-path 0.5s, -webkit-clip-path 0.5s;
+        }
+
+        .image-container .image:hover img:nth-of-type(2) {
+            -webkit-clip-path: var(--clip-end);
+            clip-path: var(--clip-end);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <h1>Welcome to Excalidraw Showcase</h1>
+        <h2>View all your excali-draws in one place!</h2>
+    </div>
+    <div class="img-body">
+        <div class="image-container">
+            {%IMG_CARDS%}
+        </div>
+    </div>
+</body>
+
+</html>

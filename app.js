@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var imagesRouter = require('./routes/images');
 var testAPIRouter = require('./routes/testAPI');
 var app = express();
 
@@ -44,17 +44,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/images', imagesRouter);
 app.use("/testAPI", testAPIRouter);
 
-//////////////////
-const buildPath = path.join(__dirname, 'build');
-
+// Static path
+const buildPath = path.join(__dirname, 'public');
 app.use(express.static(buildPath));
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-//////////////////
+
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
