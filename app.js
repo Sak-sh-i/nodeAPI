@@ -73,7 +73,8 @@ app.use(function (err, req, res, next) {
 
 
 // connect to mongdb
-const DB = secrets.DB_CLOUD;
+// const DB = secrets.DB_CLOUD;
+const DB = "mongodb://sakshi:ghostingtheghostbuster@cluster0-shard-00-00.j36x1.mongodb.net:27017,cluster0-shard-00-01.j36x1.mongodb.net:27017,cluster0-shard-00-02.j36x1.mongodb.net:27017/excalidraw-app?ssl=true&replicaSet=atlas-9bg0nn-shard-0&authSource=admin&retryWrites=true&w=majority"
 
 mongoose
   // .connect(process.env.DATABASE_LOCAL, {
