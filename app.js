@@ -73,7 +73,7 @@ app.use(function (err, req, res, next) {
 
 
 // connect to mongdb
-const DB = process.env.DATABASE_CLOUD
+const DB = secrets.DB_CLOUD;
 
 mongoose
   // .connect(process.env.DATABASE_LOCAL, {
